@@ -1,13 +1,27 @@
 import { useState, useEffect } from "react";
 import { Phone, MessageCircle, Mail, Menu, X } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("home");
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
+
+      // Simple active section detection
+      const sections = ["home", "amenities", "rooms", "location", "contact"];
+      const current = sections.find((section) => {
+        const element = document.getElementById(section);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          return rect.top <= 100 && rect.bottom >= 100;
+        }
+        return false;
+      });
+      if (current) setActiveSection(current);
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -43,19 +57,23 @@ export function Navbar() {
 
           {/* Desktop Nav */}
           <div className="hidden lg:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                className={`text-sm font-medium transition-colors ${
-                  link.label === "Home"
-                    ? "text-amber-500"
-                    : "text-gray-700 hover:text-amber-500"
-                }`}
-              >
-                {link.label}
-              </a>
-            ))}
+            {navLinks.map((link) => {
+              const sectionId = link.href.replace("#", "");
+              const isActive = activeSection === sectionId;
+              return (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  className={`text-sm font-medium transition-colors ${
+                    isActive
+                      ? "text-amber-500"
+                      : "text-gray-700 hover:text-amber-500"
+                  }`}
+                >
+                  {link.label}
+                </a>
+              );
+            })}
           </div>
 
           {/* Desktop Contact */}
@@ -98,40 +116,54 @@ export function Navbar() {
       </div>
 
       {/* Mobile Menu */}
-      {menuOpen && (
-        <div className="lg:hidden bg-white border-t border-gray-100 shadow-lg">
-          <div className="px-4 py-4 space-y-3">
-            {navLinks.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                className="block text-sm font-medium text-gray-700 hover:text-amber-500 py-2"
-                onClick={() => setMenuOpen(false)}
-              >
-                {link.label}
-              </a>
-            ))}
-            <div className="pt-3 border-t border-gray-100 space-y-3">
-              <a
-                href="tel:+918801046444"
-                className="flex items-center gap-2 px-4 py-2 bg-amber-500 text-white text-sm font-semibold rounded-md"
-              >
-                <Phone className="w-4 h-4" />
-                Call Now: +91 88010 46444
-              </a>
-              <a
-                href="https://wa.me/918801046444"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 px-4 py-2 border border-green-brand text-green-brand text-sm font-semibold rounded-md"
-              >
-                <MessageCircle className="w-4 h-4" />
-                WhatsApp
-              </a>
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className="lg:hidden bg-white border-t border-gray-100 shadow-lg overflow-hidden"
+          >
+            <div className="px-4 py-4 space-y-3">
+              {navLinks.map((link) => {
+                const sectionId = link.href.replace("#", "");
+                const isActive = activeSection === sectionId;
+                return (
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    className={`block text-sm font-medium py-2 transition-colors ${
+                      isActive ? "text-amber-500" : "text-gray-700 hover:text-amber-500"
+                    }`}
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    {link.label}
+                  </a>
+                );
+              })}
+              <div className="pt-3 border-t border-gray-100 space-y-3">
+                <a
+                  href="tel:+918801046444"
+                  className="flex items-center gap-2 px-4 py-2 bg-amber-500 text-white text-sm font-semibold rounded-md"
+                >
+                  <Phone className="w-4 h-4" />
+                  Call Now: +91 88010 46444
+                </a>
+                <a
+                  href="https://wa.me/918801046444"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 px-4 py-2 border border-green-brand text-green-brand text-sm font-semibold rounded-md"
+                >
+                  <MessageCircle className="w-4 h-4" />
+                  WhatsApp
+                </a>
+              </div>
             </div>
-          </div>
-        </div>
-      )}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 }

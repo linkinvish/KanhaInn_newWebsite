@@ -4,17 +4,22 @@ import { Star } from "lucide-react";
 
 const stats = [
   { value: 19, label: "Comfortable Rooms", suffix: "" },
-  { value: 24, label: "Security & Service", suffix: "/7", isText: true },
+  { value: 24, label: "Security & Service", suffix: "/7" },
   { value: 100, label: "Guest Satisfaction", suffix: "%" },
   { value: 5, label: "Premium Service", suffix: "★", isStar: true },
 ];
 
-function CountUp({ end, suffix, inView, duration = 1500, isText = false, isStar = false }: { 
+function CountUp({
+  end,
+  suffix,
+  inView,
+  duration = 1500,
+  isStar = false
+}: {
   end: number; 
   suffix: string; 
   inView: boolean; 
   duration?: number;
-  isText?: boolean;
   isStar?: boolean;
 }) {
   const [count, setCount] = useState(0);
@@ -22,23 +27,29 @@ function CountUp({ end, suffix, inView, duration = 1500, isText = false, isStar 
   useEffect(() => {
     if (!inView) return;
     let startTime: number | null = null;
+    let animationFrameId: number;
+
     const animate = (timestamp: number) => {
       if (!startTime) startTime = timestamp;
       const progress = Math.min((timestamp - startTime) / duration, 1);
       setCount(Math.floor(progress * end));
-      if (progress < 1) requestAnimationFrame(animate);
+      if (progress < 1) {
+        animationFrameId = requestAnimationFrame(animate);
+      }
     };
-    requestAnimationFrame(animate);
-  }, [inView, end, duration]);
 
-  if (isText) {
-    return <span>24/7</span>;
-  }
+    animationFrameId = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(animationFrameId);
+  }, [inView, end, duration]);
 
   return (
     <span>
       {count}
-      {isStar ? <Star className="w-8 h-8 inline-block ml-1 fill-current" /> : suffix}
+      {isStar ? (
+        <Star className="w-8 h-8 inline-block ml-1 fill-current" />
+      ) : (
+        suffix
+      )}
     </span>
   );
 }
@@ -63,7 +74,6 @@ export function StatsSection() {
                   end={stat.value}
                   suffix={stat.suffix}
                   inView={isInView}
-                  isText={stat.isText}
                   isStar={stat.isStar}
                 />
               </div>
