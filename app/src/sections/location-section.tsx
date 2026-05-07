@@ -2,16 +2,14 @@ import { ScrollReveal } from "@/components/scroll-reveal";
 
 export function LocationSection() {
   return (
-    <section className="py-20 bg-white">
+    <section id="location" className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <ScrollReveal>
           <div className="text-center mb-10">
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3">
               Location
             </h2>
-            <p className="text-gray-600 text-lg">
-              AhamaMau, Sultanpur Road, Lucknow, India
-            </p>
+            <p className="text-gray-600 text-lg">Ahmamau, Sultanpur Road, Lucknow, India</p>
           </div>
         </ScrollReveal>
 

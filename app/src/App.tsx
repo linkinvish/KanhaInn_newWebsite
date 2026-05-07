@@ -10,9 +10,9 @@ import { Footer } from "./sections/footer";
 
 function App() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-slate-50 text-slate-900">
       <Navbar />
-      <main>
+      <main className="overflow-x-hidden">
         <HeroSection />
         <FeaturesSection />
         <FoodServiceSection />
