@@ -15,17 +15,18 @@ export function Navbar() {
 
   const navLinks = [
     { label: "Home", href: "#home" },
+    { label: "Amenities", href: "#amenities" },
     { label: "Rooms", href: "#rooms" },
-    { label: "Blog", href: "#" },
-    { label: "About", href: "#" },
+    { label: "Location", href: "#location" },
+    { label: "Contact", href: "#contact" },
   ];
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 border-b transition-all duration-300 ${
         scrolled
-          ? "bg-white/95 backdrop-blur-md shadow-sm"
-          : "bg-white/80 backdrop-blur-sm"
+          ? "bg-white/95 backdrop-blur-md shadow-sm border-slate-200"
+          : "bg-white/85 backdrop-blur-sm border-transparent"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -33,7 +34,7 @@ export function Navbar() {
           {/* Logo */}
           <a href="#home" className="flex items-center gap-3 shrink-0">
             <img
-              src="/kanha-inn-logo.jpg"
+              src="/images/kanha-inn-logo.jpg"
               alt="Kanha Inn"
               className="h-10 w-auto rounded"
             />
@@ -49,7 +50,7 @@ export function Navbar() {
                 className={`text-sm font-medium transition-colors ${
                   link.label === "Home"
                     ? "text-amber-500"
-                    : "text-gray-600 hover:text-amber-500"
+                    : "text-gray-700 hover:text-amber-500"
                 }`}
               >
                 {link.label}
@@ -89,6 +90,7 @@ export function Navbar() {
           <button
             className="lg:hidden p-2 text-gray-600"
             onClick={() => setMenuOpen(!menuOpen)}
+            aria-label="Toggle menu"
           >
             {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>

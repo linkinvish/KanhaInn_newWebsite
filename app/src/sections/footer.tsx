@@ -1,16 +1,16 @@
-import { MapPin, Phone, Mail, Clock, Twitter, Facebook, PinIcon } from "lucide-react";
+import { MapPin, Phone, Mail, Clock } from "lucide-react";
 import { StaggerContainer, StaggerItem } from "@/components/scroll-reveal";
 
 export function Footer() {
   return (
-    <footer className="bg-navy border-t border-white/10 pt-16 pb-8">
+    <footer id="contact" className="bg-navy border-t border-white/10 pt-16 pb-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
           <StaggerItem>
             <div>
               <div className="flex items-center gap-3 mb-4">
                 <img
-                  src="/kanha-inn-logo.jpg"
+                  src="/images/kanha-inn-logo.jpg"
                   alt="Kanha Inn"
                   className="h-10 w-auto rounded"
                 />
@@ -20,25 +20,9 @@ export function Footer() {
                 Experience comfort and hospitality at its finest. Your home away from
                 home with modern amenities and personalized service.
               </p>
-              <div className="flex items-center gap-3">
-                <a
-                  href="#"
-                  className="text-white/60 hover:text-white transition-colors"
-                >
-                  <Twitter className="w-5 h-5" />
-                </a>
-                <a
-                  href="#"
-                  className="text-white/60 hover:text-white transition-colors"
-                >
-                  <Facebook className="w-5 h-5" />
-                </a>
-                <a
-                  href="#"
-                  className="text-white/60 hover:text-white transition-colors"
-                >
-                  <PinIcon className="w-5 h-5" />
-                </a>
+              <div className="flex items-center gap-3 text-xs text-white/60">
+                <span className="px-2 py-1 rounded-full bg-white/10">Family Friendly</span>
+                <span className="px-2 py-1 rounded-full bg-white/10">24/7 Service</span>
               </div>
             </div>
           </StaggerItem>
@@ -47,13 +31,18 @@ export function Footer() {
             <div>
               <h4 className="text-white font-semibold mb-4">Quick Links</h4>
               <ul className="space-y-3">
-                {["Home", "Rooms & Suites", "About Us", "Blog"].map((link) => (
-                  <li key={link}>
+                {[
+                  { label: "Home", href: "#home" },
+                  { label: "Amenities", href: "#amenities" },
+                  { label: "Rooms", href: "#rooms" },
+                  { label: "Location", href: "#location" },
+                ].map((link) => (
+                  <li key={link.label}>
                     <a
-                      href="#"
+                      href={link.href}
                       className="text-white/70 hover:text-amber-500 text-sm transition-colors"
                     >
-                      {link}
+                      {link.label}
                     </a>
                   </li>
                 ))}
@@ -68,17 +57,16 @@ export function Footer() {
                 <li className="flex items-start gap-2 text-white/70 text-sm">
                   <MapPin className="w-4 h-4 text-amber-500 mt-0.5 shrink-0" />
                   <span>
-                    123 Heritage Street, Kanha National Park Area, Madhya Pradesh
-                    481768, India
+                    Ahmamau, Sultanpur Road, Lucknow, Uttar Pradesh, India
                   </span>
                 </li>
                 <li className="flex items-center gap-2 text-white/70 text-sm">
                   <Phone className="w-4 h-4 text-amber-500 shrink-0" />
-                  <span>+91 98765 43210</span>
+                  <a href="tel:+918801046444" className="hover:text-amber-400 transition-colors">+91 88010 46444</a>
                 </li>
                 <li className="flex items-center gap-2 text-white/70 text-sm">
                   <Mail className="w-4 h-4 text-amber-500 shrink-0" />
-                  <span>info@kanhainn.com</span>
+                  <a href="mailto:lko.kanhainn@gmail.com" className="hover:text-amber-400 transition-colors">lko.kanhainn@gmail.com</a>
                 </li>
               </ul>
             </div>
@@ -110,14 +98,14 @@ export function Footer() {
 
         <div className="border-t border-white/10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-white/50 text-sm">
-            &copy; 2024 Kanha Inn. All rights reserved.
+            &copy; 2026 Kanha Inn. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
             {["Privacy Policy", "Terms of Service", "Cancellation Policy"].map(
               (link) => (
                 <a
                   key={link}
-                  href="#"
+                  href="#contact"
                   className="text-white/50 hover:text-amber-500 text-sm transition-colors"
                 >
                   {link}

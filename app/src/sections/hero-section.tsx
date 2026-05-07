@@ -3,7 +3,7 @@ import { Phone, MessageCircle } from "lucide-react";
 
 export function HeroSection() {
   return (
-    <section id="home" className="relative min-h-[600px] h-[90vh] overflow-hidden">
+    <section id="home" className="relative min-h-[620px] h-[95vh] overflow-hidden">
       {/* Background Image Grid */}
       <div className="absolute inset-0 grid grid-cols-2 grid-rows-2">
         <div className="relative overflow-hidden">
@@ -23,7 +23,7 @@ export function HeroSection() {
         </div>
         <div className="relative overflow-hidden">
           <img
-            src="/images/hero-3.jpg"
+            src="/images/hero-3.JPG"
             alt="Kanha Inn Room"
             className="w-full h-full object-cover animate-ken-burns"
             style={{ animationDelay: "4s" }}
@@ -31,7 +31,7 @@ export function HeroSection() {
         </div>
         <div className="relative overflow-hidden">
           <img
-            src="/images/hero-4.jpg"
+            src="/images/hero-4.JPG"
             alt="Kanha Inn Deluxe Room"
             className="w-full h-full object-cover animate-ken-burns"
             style={{ animationDelay: "6s" }}
@@ -40,11 +40,11 @@ export function HeroSection() {
       </div>
 
       {/* Dark Overlay */}
-      <div className="absolute inset-0 bg-black/50" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/70" />
 
       {/* Content */}
       <div className="relative z-10 flex items-center justify-center h-full px-4">
-        <div className="max-w-3xl text-center">
+        <div className="max-w-4xl text-center">
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -58,7 +58,7 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.45 }}
-            className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-4"
+            className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-5 text-balance"
           >
             Premium comfort,{" "}
             <span className="text-amber-400">budget price</span>
